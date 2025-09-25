@@ -3,13 +3,27 @@
 import re
 
 def red_green_blue(filename="src/rgb.txt"):
-    
+    result = []
+    count = 0
+    with open(filename, "r") as f:
+        for line in f:
+            count+=1
+            if count==1:
+                continue
+            parse = re.findall(r"(\d+)\s+(\d+)\s+(\d+)\s+([A-Za-z0-9]+\s?[A-Za-z]+[0-9]*)", line)
+            for r, g, b, name in parse:
+                result.append(f"{int(r)}\t{int(g)}\t{int(b)}\t{name}")
+                print(f"{count-1} appended {len(result)}")
+        return result
+    #(\d+)\s(\d+)\s(\d+)\s+([A-Za-z]*\s?[A-Za-z]*)
 
 
 
 def main():
     result = red_green_blue()
-    print()
+    print(result)
+    print(len(result)
+    )
 
     #print(f"The result should be a list, it is a {type(result)}
     #print(f"The length of the list should be 753, was {len(result)}   
